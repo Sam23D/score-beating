@@ -3,7 +3,7 @@ let state = {
 }
 
 let logos_pages_db = {
-
+    Ravens: "baltimoreravens"
 }
 
 function obtener_juegos( url = "http://www.nfl.com/liveupdate/scorestrip/ss.json" ){
@@ -90,6 +90,7 @@ function team_view( team ){
                 <img src="//logo.clearbit.com/<%= team.name %>.com">
             </div>
             <div class="content">
+                <p><%= team.name %></p>
                 <a class="header"><%= team.score %></a>
             </div>
             </div>
