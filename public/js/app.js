@@ -1,3 +1,4 @@
+// Models
 let state = {
     games : []
 }
@@ -6,6 +7,8 @@ let logos_pages_db = {
     Ravens: "baltimoreravens"
 }
 
+
+// Controllers
 function obtener_juegos( url = "http://www.nfl.com/liveupdate/scorestrip/ss.json" ){
     fetch( url ).then(  
     function(response) {  
@@ -14,8 +17,7 @@ function obtener_juegos( url = "http://www.nfl.com/liveupdate/scorestrip/ss.json
           response.status);  
         return;  
       }
-      response.json().then(function(data) {  
-        console.log(data);
+      response.json().then(function(data) { 
         state.games = data.gms
         display_game_cards( state )
       });  
@@ -26,10 +28,6 @@ function obtener_juegos( url = "http://www.nfl.com/liveupdate/scorestrip/ss.json
   });
 }
 
-function team_logo( team_name ){
-    return `<img src="//logo.clearbit.com/${ team_name }.com">`
-}
-
 function game_beating( game ){
     visita = get_visita(game)
     casa = get_casa(game)
@@ -37,7 +35,7 @@ function game_beating( game ){
     if( casa.score > visita.score ){
         winner = casa.name
         loser = visita.name
-    }else{
+    }else if( casa.score > visita.score ){
         winner = visita.name
         loser = casa.name
     }
@@ -62,7 +60,25 @@ function get_casa( game ){
         score: game.hs
     }
 }
-
+function fuzzy_quote( game ){
+    value = game_beating( game ).beating
+    quotes = [  "gg ez pz no re",
+                "do you even lift?",
+                "clearly beaten",
+                "fairly close",
+                "supah tight"]
+    if( value < 0.2 ){
+        return quotes[4]
+    }else if(value < 0.4){
+        return quotes[3]
+    }else if(value < 0.6){
+        return quotes[2]
+    }else if(value < 0.8){
+        return quotes[1]
+    }else if(value < 1){
+        return quotes[0]
+    }
+}
 // VIEW
 function result_card( game ){
     view = _.template(`
@@ -75,7 +91,7 @@ function result_card( game ){
                 </div>
               </div>
               <div class="six wide column" > 
-                <h1>You got REKT</h1>
+                <h1><%= fuzzy_quote( game ) %></h1>
               </div>
             </div>
         </div>
@@ -87,7 +103,7 @@ function team_view( team ){
         <div class="column">
             <div class="ui fluid raised card">
             <div class="image">
-                <img src="//logo.clearbit.com/<%= team.name %>.com">
+                <%= team_logo(team.name) %>
             </div>
             <div class="content">
                 <p><%= team.name %></p>
@@ -98,7 +114,10 @@ function team_view( team ){
     `)
     return view( {team: team} )
 }
-
+function team_logo( team_name ){
+    filtered_name = logos_pages_db[ team_name ] || team_name
+    return `<img src="//logo.clearbit.com/${ filtered_name }.com">`
+}
 function display_game_cards( state ){
     container = document.getElementById( "games_container" )
     container.innerHTML = state.games.map( result_card )
