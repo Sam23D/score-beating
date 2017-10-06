@@ -8,7 +8,14 @@ let logos_pages_db = {
     Titans: "titansonline",
     Rams: "therams",
     Cowboys: "dallascowboys",
-    Bears: "chicagobears"
+    Bears: "chicagobears",
+    Bills: "buffalobills",
+    Jets: "newyorkjets",
+    Lions: "detroitlions",
+    Eagles: "philadelphiaeagles",
+    Cardinals: "azcardinals",
+    Bears: "chicagobears",
+    Texans: "houstontexans"
 }
 
 
