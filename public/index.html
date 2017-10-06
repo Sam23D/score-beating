@@ -7,7 +7,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <!-- update the version number as needed -->
     <script defer src="/__/firebase/4.5.0/firebase-app.js"></script>
     <!-- include only the Firebase features as you need -->
@@ -17,8 +17,8 @@
     <script defer src="/__/firebase/4.5.0/firebase-storage.js"></script>
     <!-- initialize the SDK after all desired features are loaded -->
     <script defer src="/__/firebase/init.js"></script>
-    <script defer src="http://medialab.github.io/artoo/public/dist/artoo-latest.min.js"></script>
-
+    <script defer src="/js/membership.js" ></script>
+    <script defer src="/js/app.js" ></script>
   </head>
   <body>
 
@@ -26,62 +26,32 @@
       <div class="ten wide column ">
         <h2>Score beating... DAMN</h2>
         <p>We qualify the latest NFL games scores from nothing, to "STOP STOP, he's already dead!"</p>
-        
-        <div class="ui segment">
-            <div class="ui grid" >
-              <div class="six wide column" > 
-                <div class="ui two column grid">
-                  <div class="column">
-                      <div class="ui fluid raised card">
-                        <div class="image">
-                          <img src="http://lorempixel.com/100/100/sports/">
-                        </div>
-                        <div class="content">
-                          <a class="header">10</a>
-                        </div>
-                      </div>
-                  </div>
-                  <div class="column">
-                      <div class="ui fluid card">
-                        <div class="image">
-                          <img src="http://lorempixel.com/100/100/animals/">
-                        </div>
-                        <div class="content">
-                          <a class="header">21</a>
-                        </div>
-                      </div>
-                  </div>
-                </div>
-                
-                
-              
+        <button onclick="display_games()">Latest Games</button>
+        <div id="games_container" >
 
-              </div>
-              <div class="six wide column" > 
-                <h1>You got REKT</h1>
-              </div>
-              <script>
-                scores = Array.from(document.getElementsByClassName("cell_sa")).map( x => x.innerText )
-                scores_regex = /(\d*).{3}(\d*)/g
-                Array.prototype.average = function() {
-                    var sum = 0;
-                    this.reduce(function(a, b) {
-                        sum = a + b;
-                        return sum;
-                    });
-                    return sum / this.length;
-                };
-                dif = function(x){
-                  let res = x.split(":");
-                  fst = parseInt(res[0])
-                  lst = parseInt(res[1])
-                  return Math.abs( fst - lst )
-                }
-              </script>
-            </div>
         </div>
       </div>
     </div>
-    </script>
+
+    <script>
+  /* Script that parses the data from the NFL page
+  scores = Array.from(document.getElementsByClassName("cell_sa")).map( x => x.innerText )
+  scores_regex = /(\d*).{3}(\d*)/g
+  Array.prototype.average = function() {
+      var sum = 0;
+      this.reduce(function(a, b) {
+          sum = a + b;
+          return sum;
+      });
+      return sum / this.length;
+  };
+  dif = function(x){
+    let res = x.split(":");
+    fst = parseInt(res[0])
+    lst = parseInt(res[1])
+    return Math.abs( fst - lst )
+  }*/
+</script>
+
   </body>
 </html>
