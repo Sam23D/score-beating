@@ -60,7 +60,24 @@
               <div class="six wide column" > 
                 <h1>You got REKT</h1>
               </div>
-              
+              <script>
+                scores = Array.from(document.getElementsByClassName("cell_sa")).map( x => x.innerText )
+                scores_regex = /(\d*).{3}(\d*)/g
+                Array.prototype.average = function() {
+                    var sum = 0;
+                    this.reduce(function(a, b) {
+                        sum = a + b;
+                        return sum;
+                    });
+                    return sum / this.length;
+                };
+                dif = function(x){
+                  let res = x.split(":");
+                  fst = parseInt(res[0])
+                  lst = parseInt(res[1])
+                  return Math.abs( fst - lst )
+                }
+              </script>
             </div>
         </div>
       </div>
