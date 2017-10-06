@@ -79,13 +79,14 @@ function score_diference(game){
 }
 function fuzzy_quote( game ){
     value = game_beating( game ).beating
+    diference = game_beating( game ).diference
     quotes = [  "GG EZ PZ NO RE",
                 "Do you even lift?",
                 "Clearly beaten",
                 "Fairly close",
                 "Supah tight"]
-    if( value == 0){
-        return "Game not played yet"
+    if( diference == 0){
+        return "Game not played yet"   
     }else if( value < 0.2 ){
         return quotes[4]
     }else if(value < 0.4){
