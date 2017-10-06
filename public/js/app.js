@@ -4,7 +4,11 @@ let state = {
 }
 
 let logos_pages_db = {
-    Ravens: "baltimoreravens"
+    Ravens: "baltimoreravens",
+    Titans: "titansonline",
+    Rams: "therams",
+    Cowboys: "dallascowboys",
+    Bears: "chicagobears"
 }
 
 
