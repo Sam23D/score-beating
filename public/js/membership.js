@@ -2,7 +2,7 @@
 
 function score_beating( first, second ){
     diff = Math.abs( first - second )
-    return fuzzy_of(diff)
+    return { beating : fuzzy_of(diff), diference: diff}
 }
 
 function fuzzy_of( value, config = { inflexion: 11.878504672897197 , slope: 0.2 , max: 38 , min: 1 } ){

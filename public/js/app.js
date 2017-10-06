@@ -50,8 +50,10 @@ function game_beating( game ){
         winner = visita.name
         loser = casa.name
     }
+    res = score_beating( visita.score, casa.score )
     return {
-        beating: score_beating( visita.score, casa.score ),
+        beating: res.beating,
+        diference: res.diference,
         winner: winner,
         loser: loser
     }
@@ -71,14 +73,20 @@ function get_casa( game ){
         score: game.hs
     }
 }
+function score_diference(game){
+    diference = game_beating( game ).diference
+    return `Score diference of: ${ diference } pts`
+}
 function fuzzy_quote( game ){
     value = game_beating( game ).beating
-    quotes = [  "gg ez pz no re",
-                "do you even lift?",
-                "clearly beaten",
-                "fairly close",
-                "supah tight"]
-    if( value < 0.2 ){
+    quotes = [  "GG EZ PZ NO RE",
+                "Do you even lift?",
+                "Clearly beaten",
+                "Fairly close",
+                "Supah tight"]
+    if( value == 0){
+        return "Game not played yet"
+    }else if( value < 0.2 ){
         return quotes[4]
     }else if(value < 0.4){
         return quotes[3]
@@ -101,12 +109,12 @@ function result_card( game ){
                   <%= team_view( get_visita( game ) ) %>
                 </div>
               </div>
-              <div class="six wide column" > 
+              <div class="ten wide column" > 
+                <h4><%= score_diference( game ) %></h4>
                 <h1><%= fuzzy_quote( game ) %></h1>
               </div>
             </div>
-        </div>
-    `);
+        </div>`);
     return view( {game: game} )
 }
 function team_view( team ){
@@ -121,8 +129,7 @@ function team_view( team ){
                 <a class="header"><%= team.score %></a>
             </div>
             </div>
-        </div>
-    `)
+        </div>`)
     return view( {team: team} )
 }
 function team_logo( team_name ){
@@ -131,7 +138,7 @@ function team_logo( team_name ){
 }
 function display_game_cards( state ){
     container = document.getElementById( "games_container" )
-    container.innerHTML = state.games.map( result_card )
+    container.innerHTML = state.games.map( result_card ).join("")
 }
 
 function display_games(){
